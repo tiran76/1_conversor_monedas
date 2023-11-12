@@ -1,21 +1,29 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-const useCurrencyConverter = () => {
-    const [euros, setEuros] = useState(0);
-    const [dollars, setDollars] = useState(0);
-    const conversionRate = 1.1; // 1 euro = 1.1 dólares
+const useCurrencyConverter = (initialValue, exchangeRate) => {
+  const [localCurrency, setLocalCurrency] = useState(initialValue);
+  const [euros, setEuros] = useState(initialValue / exchangeRate);
 
-    const convertCurrency = (amount, isEuroInput) => {
-        if (isEuroInput) {
-            setEuros(amount);
-            setDollars(amount * conversionRate);
-        } else {
-            setDollars(amount);
-            setEuros(amount / conversionRate);
-        }
-    };
+  const toFixedNumber = (num, digits) => {
+      return parseFloat(num.toFixed(digits));
+  };
 
-    return { euros, dollars, convertCurrency };
+  useEffect(() => {
+      setEuros(toFixedNumber(localCurrency / exchangeRate, 2));
+  }, [localCurrency, exchangeRate]);
+
+  useEffect(() => {
+      setLocalCurrency(toFixedNumber(euros * exchangeRate, 2));
+  }, [euros, exchangeRate]);
+
+  return {
+      localCurrency, 
+      setLocalCurrency,
+      euros,
+      setEuros
+  };
 };
+
+
 
 export default useCurrencyConverter;

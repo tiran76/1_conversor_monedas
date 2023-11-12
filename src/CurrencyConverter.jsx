@@ -13,7 +13,7 @@ const CurrencyConverter = () => {
                 onChange={convertCurrency} 
                 currencyType="euros"
             />
-            <div>Dolares</div>
+            <div>doalres</div>
             <CustomInput 
                 value={dollars} 
                 onChange={convertCurrency} 
