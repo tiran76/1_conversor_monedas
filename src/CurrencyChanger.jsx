@@ -11,6 +11,7 @@ const CurrencyChanger = ({ currencySymbol, initialValue, exchangeRate }) => {
 
     return (
         <div>
+            
             <label>
                 {currencySymbol}:
                 <input 
