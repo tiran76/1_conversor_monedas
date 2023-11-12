@@ -1,25 +1,26 @@
 import React from 'react';
-import useCurrencyConverter from './useCurrencyConverter'; // Asegúrate de importar correctamente el hook
+import useCurrencyConverter from './useCurrencyConverter';
+import CustomInput from './CustomInput';
 
 const CurrencyConverter = () => {
-    const { euros, dollars, convert } = useCurrencyConverter();
-
-    const handleInputChange = (event) => {
-        convert(event.target.value);
-    };
+    const { euros, dollars, convertCurrency } = useCurrencyConverter();
 
     return (
-        <div>
-            <input 
-                type="number" 
+        <>
+        <div>euros</div>
+            <CustomInput 
                 value={euros} 
-                onChange={handleInputChange} 
-                placeholder="Introduce euros"
+                onChange={convertCurrency} 
+                currencyType="euros"
             />
-            <p>{dollars} dólares</p>
-        </div>
+            <div>Dolares</div>
+            <CustomInput 
+                value={dollars} 
+                onChange={convertCurrency} 
+                currencyType="dólares"
+            />
+        </>
     );
 };
 
 export default CurrencyConverter;
-
