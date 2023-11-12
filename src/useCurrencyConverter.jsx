@@ -12,3 +12,5 @@ const useCurrencyConverter = () => {
 
     return { euros, dollars, convert };
 };
+
+export default useCurrencyConverter;
